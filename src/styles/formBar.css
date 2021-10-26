@@ -1,0 +1,9 @@
+.formBar {
+    width: 100%;
+    margin: 10rem 20rem;
+}
+
+.input-container {
+    display: flex;
+    justify-content: space-between;
+}
