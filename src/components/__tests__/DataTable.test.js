@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import DataTable from 'components/DataTable';
 
 describe('DataTable', () => {
-    let getByTestId, container;
+    let getByTestId, container, rerender;
 
     const columns = [
         { header: 'ID', name: 'id' },
@@ -11,10 +11,14 @@ describe('DataTable', () => {
         { header: 'Email', name: 'email' }
     ];
 
-    let data = [];
+    const data = [
+        { id: 5, name: 'John', email: 'john@example.com' },
+        { id: 6, name: 'Liam', email: 'liam@example.com' },
+        { id: 7, name: 'Maya', email: 'maya@example.com', someTest: 10 }
+    ];
 
     beforeEach(() => {
-        ({ getByTestId, container } = render(<DataTable columns={columns} data={data} />));
+        ({ getByTestId, container, rerender } = render(<DataTable columns={columns} data={[]} />));
     });
 
     test("renders DataTable", () => {
@@ -29,8 +33,18 @@ describe('DataTable', () => {
         expect(dataTableContainer.childElementCount).toEqual(1);
         expect(dataTableContainer).toContainElement(dataTable);
         expect(dataTable.childElementCount).toEqual(1);
-        expect(dataTableContainer).toContainElement(dataTableHead);
+        expect(dataTable).toContainElement(dataTableHead);
         expect(dataTableHead.childElementCount).toEqual(1);
         expect(dataTableHead).toContainHTML('<tr><th>ID</th><th>Name</th><th>Email</th></tr>');
+    });
+
+    test("renders dynamic data from props", () => {
+        rerender(<DataTable columns={columns} data={data} />);
+
+        const dataTable = getByTestId('dataTable');
+        const dataTableBody = getByTestId('dataTable-body');
+        expect(dataTable.childElementCount).toEqual(2);
+        expect(dataTable).toContainElement(dataTableBody);
+        expect(dataTableBody.childElementCount).toEqual(3);
     });
 });
