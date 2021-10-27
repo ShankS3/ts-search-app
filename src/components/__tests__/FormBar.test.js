@@ -5,7 +5,7 @@ import FormBar from 'components/FormBar';
 
 describe('Form Bar', () => {
     let getByTestId, getByRole;
-    beforeEach(async () => {
+    beforeEach(() => {
         ({ getByTestId, getByRole } = render(<FormBar />));
     });
 
@@ -33,9 +33,7 @@ test('renders select field', () => {
 
     expect(sortSelect).toBeInTheDocument();
     expect(sortSelect).toHaveValue('sort1');
-    console.log("consoling sort select", sortSelect.value);
     userEvent.selectOptions(sortSelect, ['sort2']);
-    console.log("consoling sort select", sortSelect.value);
     expect(sortSelect.value).toEqual('sort2');
     expect(getByRole('option', {name: 'sort1'}).selected).toBe(false)
     expect(getByRole('option', {name: 'sort2'}).selected).toBe(true)
