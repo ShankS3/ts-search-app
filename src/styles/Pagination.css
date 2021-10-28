@@ -1,0 +1,57 @@
+.pagination-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 1rem 0.5em 0.5rem 0.5rem;
+    justify-content: end;
+    font-size: 1.2rem
+}
+
+.page-button {
+    background: transparent;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    margin: 0 0.25rem;
+    border-radius: 50%;
+    font-size: bold;
+    color: rgb(0, 89, 255)
+}
+
+.page-button:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.page-button:focus {
+    outline: 0;
+}
+
+.page-button:disabled {
+    background: rgb(0, 89, 255);
+    color: white;
+    cursor: default;
+    text-decoration: none;
+}
+
+.previous-button, .next-button {
+    background: transparent;
+    border: none;
+    height: 2rem;
+    width: 2rem;
+    cursor: pointer;
+    margin: 0 0.25rem;
+    border-radius: 50%;
+    box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+.previous-button:hover, .next-button:hover {
+    text-decoration: none;
+    box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.12) 0px 6px 16px;
+}
+
+.previous-button:disabled, .next-button:disabled {
+    background: lightgrey;
+    text-decoration: none;
+    box-shadow: none;
+    cursor: default;
+}

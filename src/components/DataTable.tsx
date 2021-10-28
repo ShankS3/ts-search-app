@@ -21,7 +21,7 @@ const DataTable: React.FC<Props> = ({columns, data}) => {
                         {data.map((row, index) =>
                         <tr key={index}>
                             {columns.map(col =>
-                                <td key={col.name}>{row[col.name]}</td>
+                                <td key={col.name} data-label={col.header}>{row[col.name]}</td>
                             )}
                         </tr>
                         )}

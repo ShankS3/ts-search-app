@@ -1,0 +1,33 @@
+.formbar {
+    width: 100%;
+    padding: 1rem 0.50rem;
+}
+
+.input-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.input-container > div {
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 40em) {
+    .input-container {
+        justify-content: center;
+    }
+}
+
+#search-text, #search-button, #sort-select {
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid lightslategray;
+}
+
+#search-button {
+    border: none;
+    border-radius: none;
+    margin-left: -2rem;
+    cursor: pointer;
+}

@@ -1,9 +1,79 @@
 .dataTable-container {
-    margin-top: 2rem;
+    margin: 2rem 0;
     width: 100%;
-    overflow-x: auto;
 }
 
-.dataTable {
-    min-width: 100%;
+table.dataTable {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+    word-wrap: break-word;
+}
+
+.dataTable-head {
+    background-color: #f8f8f8;
+}
+  
+.dataTable tr {
+    border: 1px solid #ddd;
+    padding: .35em;
+}
+
+.dataTable tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+  
+.dataTable th, .dataTable td {
+    padding: .625em;
+    text-align: center;
+}
+  
+.dataTable th {
+    font-size: .85em;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+  
+@media screen and (max-width: 40em) {
+    .dataTable {
+      border: 0;
+    }
+    
+    .dataTable .dataTable-head {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+    
+    .dataTable tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: .625em;
+    }
+    
+    .dataTable td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: .8em;
+      text-align: right;
+    }
+    
+    .dataTable td::before {
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    
+    .dataTable td:last-child {
+      border-bottom: 0;
+    }
 }
