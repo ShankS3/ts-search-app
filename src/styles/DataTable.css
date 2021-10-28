@@ -1,0 +1,9 @@
+.dataTable-container {
+    margin-top: 2rem;
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dataTable {
+    min-width: 100%;
+}
