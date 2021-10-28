@@ -1,18 +1,10 @@
 import React from 'react';
-import 'styles/DataTable.css'
-
-interface column {
-    header: string;
-    name: string;
-}
-
-interface data {
-    [key: string]: string;
-}
+import 'styles/DataTable.css';
+import { columnArray, dataArray } from 'constants/types';
 
 interface Props {
-    columns: column[]
-    data: data[]
+    columns: columnArray
+    data: dataArray
 }
 
 const DataTable: React.FC<Props> = ({columns, data}) => {
