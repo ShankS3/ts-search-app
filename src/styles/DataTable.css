@@ -1,7 +1,6 @@
 .dataTable-container {
     margin-top: 2rem;
     width: 100%;
-    overflow-x: auto;
 }
 
 table.dataTable {
@@ -11,6 +10,7 @@ table.dataTable {
     padding: 0;
     width: 100%;
     table-layout: fixed;
+    word-wrap: break-word;
 }
 
 .dataTable-head {
@@ -37,7 +37,7 @@ table.dataTable {
     text-transform: uppercase;
 }
   
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 40em) {
     .dataTable {
       border: 0;
     }
@@ -77,4 +77,3 @@ table.dataTable {
       border-bottom: 0;
     }
 }
-  
