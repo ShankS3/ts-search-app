@@ -17,7 +17,6 @@ test('renders input field', () => {
     expect(searchInput).toHaveAttribute('type', 'text');
     expect(searchInput).toHaveValue('');
     expect(searchButton).toBeInTheDocument();
-    expect(searchButton).toHaveTextContent('search');
 });
 
 test('clicking the search button', () => {
