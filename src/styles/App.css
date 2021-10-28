@@ -2,10 +2,3 @@
   width: 80%;
   margin: 0 auto;
 }
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-top: 2rem
-}
