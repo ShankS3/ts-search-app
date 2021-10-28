@@ -44,18 +44,6 @@ function App() {
     "image": "http://lorempixel.com/640/480",
     "description": "Quis eos in repudiandae. Dicta dolore rerum unde sapiente. Consequatur ea rerum non alias et sapiente dolore aliquid. Eius quia delectus porro id non voluptas.",
     "dateLastEdited": "2018-07-27T05:58:52.006Z"
-  },
-  {
-    "name": "Human Data Designer",
-    "image": "http://lorempixel.com/640/480",
-    "description": "Vero enim dignissimos. Numquam harum facilis delectus itaque dolore libero omnis asperiores aut. Deserunt quas dolore omnis quibusdam aut. A nihil expedita repellat eaque unde eveniet voluptatum harum.",
-    "dateLastEdited": "2018-06-05T03:48:43.495Z"
-  },
-  {
-    "name": "Dynamic Identity Specialist",
-    "image": "http://lorempixel.com/640/480",
-    "description": "Quasi temporibus hic et accusantium. Ea et ullam illum esse quae ea adipisci. Rerum nihil quod ex error voluptatem voluptatem et culpa. Nemo voluptatem veritatis fugiat molestiae officiis adipisci. Perferendis et sed illum.",
-    "dateLastEdited": "2018-01-02T05:52:11.738Z"
   }
 ];
 
@@ -70,7 +58,7 @@ function App() {
     <div className="App" data-testid="App">
       <h3 className="page-title" data-testid="page-title">Feed</h3>
       <FormBar />
-      <Pagination page={1} pageSize={1} handlePagination={(val)=>console.log(val)} />
+      <Pagination page={11} pageSize={15} handlePagination={(val)=>console.log(val)} />
       <div className="card-container" data-testid="card-container">
         {data.map(d => <InfoCard key={d.dateLastEdited} data={d} />)}
       </div>
