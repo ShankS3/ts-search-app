@@ -25,9 +25,11 @@ const FormBar: React.FC<any> = () => {
                 <div>
                     <label htmlFor="sort-select">Sort by </label>
                     <select id="sort-select" data-testid="sort-select" onChange={submitFilters} ref={selectRef}>
-                        <option>sort1</option>
-                        <option>sort2</option>
-                        <option>sort3</option>
+                        <option value="">select option</option>
+                        <option value="name,asc">Name - Ascending</option>
+                        <option value="name,desc">Name - Descending</option>
+                        <option value="dateLastEdited,asc">Last updated - Ascending</option>
+                        <option value="dateLastEdited,desc">Last updated - Descending</option>
                     </select>
                 </div>
             </div>

@@ -39,11 +39,12 @@ test('renders select field', () => {
     const sortSelect = getByTestId('sort-select');
 
     expect(sortSelect).toBeInTheDocument();
-    expect(sortSelect).toHaveValue('sort1');
-    userEvent.selectOptions(sortSelect, ['sort2']);
-    expect(sortSelect.value).toEqual('sort2');
-    expect(getByRole('option', {name: 'sort1'}).selected).toBe(false)
-    expect(getByRole('option', {name: 'sort2'}).selected).toBe(true)
-    expect(getByRole('option', {name: 'sort3'}).selected).toBe(false)
+    expect(sortSelect).toHaveValue('');
+    userEvent.selectOptions(sortSelect, ['name,desc']);
+    expect(sortSelect.value).toEqual('name,desc');
+    expect(getByRole('option', {name: 'Name - Ascending'}).selected).toBe(false)
+    expect(getByRole('option', {name: 'Name - Descending'}).selected).toBe(true)
+    expect(getByRole('option', {name: 'Last updated - Ascending'}).selected).toBe(false)
+    expect(getByRole('option', {name: 'Last updated - Descending'}).selected).toBe(false)
 });
 });
