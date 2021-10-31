@@ -5,8 +5,11 @@ import FormBar from 'components/FormBar';
 
 describe('Form Bar', () => {
     let getByTestId, getByRole;
+    let page = 1;
+    let submitAction = jest.fn();
+
     beforeEach(() => {
-        ({ getByTestId, getByRole } = render(<FormBar />));
+        ({ getByTestId, getByRole } = render(<FormBar page={page} submitAction={submitAction} />));
     });
 
 test('renders input field', () => {
@@ -25,6 +28,11 @@ test('clicking the search button', () => {
     userEvent.type(searchInput, 'abc');
     userEvent.click(searchButton);
     expect(searchInput.value).toEqual('abc');
+    expect(submitAction).toBeCalledWith({
+        searchText: 'abc',
+        sortBy: 'sort1',
+        page
+    })
 });
 
 test('renders select field', () => {
