@@ -29,13 +29,18 @@ export function onFetchFeeds (formData: FeedFormData) {
         return await fetch(`
             http://localhost:8002/feeds?page=${formData.page}&searchText=${formData.searchText}&sortBy=${formData.sortBy}`
         )
-            .then(response => response.json())
-            .then(success => useAppDispatch(onFetchFeedsSuccess(success, formData)))
-            .catch(error => useAppDispatch(onFetchFeedsError(
-                    Object.assign({}, formData, {
-                        errorMessage: error?.responseJSON?.detail || 'Any error occured'
-                    })
-                ))
-            );
+        .then((response) => {
+            if(!response.ok) throw new Error(response.statusText);
+            else return response.json();
+        })
+        .then((success) => useAppDispatch(onFetchFeedsSuccess(success, formData)))
+        .catch((error) => {
+            useAppDispatch(onFetchFeedsError(
+                Object.assign({}, formData, {
+                    errorMessage: error.message || 'An error occurred'
+                })
+            ))
+        }
+        );
     }
 }
