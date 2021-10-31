@@ -25,6 +25,10 @@
     border: 1px solid lightslategray;
 }
 
+#search-text:focus {
+    outline: none;
+}
+
 #search-button {
     border: none;
     border-radius: none;
