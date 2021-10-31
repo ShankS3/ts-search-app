@@ -30,7 +30,7 @@ test('clicking the search button', () => {
     expect(searchInput.value).toEqual('abc');
     expect(submitAction).toBeCalledWith({
         searchText: 'abc',
-        sortBy: 'sort1',
+        sortBy: '',
         page
     })
 });
@@ -46,5 +46,10 @@ test('renders select field', () => {
     expect(getByRole('option', {name: 'Name - Descending'}).selected).toBe(true)
     expect(getByRole('option', {name: 'Last updated - Ascending'}).selected).toBe(false)
     expect(getByRole('option', {name: 'Last updated - Descending'}).selected).toBe(false)
+    expect(submitAction).toBeCalledWith({
+        searchText: '',
+        sortBy: 'name,desc',
+        page
+    })
 });
 });
