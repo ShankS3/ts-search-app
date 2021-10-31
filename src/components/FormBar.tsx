@@ -6,10 +6,12 @@ import 'styles/FormBar.css';
 
 interface FormBarProps {
     page: number,
+    sortBy: string,
+    searchText: string,
     submitAction: (formData: FeedFormData) => {}
 }
 
-const FormBar: React.FC<FormBarProps> = ({page, submitAction}) => {
+const FormBar: React.FC<FormBarProps> = ({page=1, sortBy="", searchText="", submitAction}) => {
     const searchInputRef = useRef<HTMLInputElement>(null);
     const sortSelectRef = useRef<HTMLSelectElement>(null);
 
@@ -30,11 +32,12 @@ const FormBar: React.FC<FormBarProps> = ({page, submitAction}) => {
                 <div>
                     <form onSubmit={submitFilters}>
                         <input 
-                            type="text" 
-                            id="search-text" 
-                            data-testid="search-text" 
-                            placeholder='Search...' 
-                            ref={searchInputRef} 
+                            type="text"
+                            id="search-text"
+                            data-testid="search-text"
+                            placeholder='Search...'
+                            ref={searchInputRef}
+                            defaultValue={searchText}
                         />
                         <button 
                             id="search-button" 
@@ -46,7 +49,13 @@ const FormBar: React.FC<FormBarProps> = ({page, submitAction}) => {
                 </div>
                 <div>
                     <label htmlFor="sort-select">Sort by </label>
-                    <select id="sort-select" data-testid="sort-select" onChange={submitFilters} ref={sortSelectRef}>
+                    <select
+                        id="sort-select"
+                        data-testid="sort-select"
+                        onChange={submitFilters}
+                        ref={sortSelectRef}
+                        value={sortBy}
+                    >
                         <option value="">select option</option>
                         <option value="name,asc">Name - Ascending</option>
                         <option value="name,desc">Name - Descending</option>
