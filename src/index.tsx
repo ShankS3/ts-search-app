@@ -2,9 +2,10 @@ import React, { Profiler } from 'react';
 import ReactDOM from 'react-dom';
 import 'styles/index.css';
 import App from 'components/App';
-import { store } from 'store/store';
+import { persistor, store } from 'store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { PersistGate } from 'redux-persist/integration/react';
 
 function onRenderCallback(
   _id: any,
@@ -19,9 +20,11 @@ function onRenderCallback(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Profiler id="IFRM" onRender={onRenderCallback}>
-        <App />
-      </Profiler>
+      <PersistGate loading={null} persistor={persistor}>
+        <Profiler id="IFRM" onRender={onRenderCallback}>
+          <App />
+        </Profiler>
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
