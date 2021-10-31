@@ -28,11 +28,7 @@ describe('Form Bar', () => {
         userEvent.type(searchInput, 'abc');
         userEvent.click(searchButton);
         expect(searchInput.value).toEqual('abc');
-        expect(submitAction).toBeCalledWith({
-            searchText: 'abc',
-            sortBy: '',
-            page
-        })
+        expect(submitAction).toBeCalledWith('abc','');
 
         rerender(<FormBar page={page} searchText={'abc'} sortBy={''} submitAction={submitAction} />);
         expect(searchInput.value).toEqual('abc');
@@ -44,11 +40,7 @@ describe('Form Bar', () => {
         expect(sortSelect).toBeInTheDocument();
         expect(sortSelect).toHaveValue('');
         userEvent.selectOptions(sortSelect, ['name,desc']);
-        expect(submitAction).toBeCalledWith({
-            searchText: '',
-            sortBy: 'name,desc',
-            page
-        });
+        expect(submitAction).toBeCalledWith('','name,desc');
 
         rerender(<FormBar page={page} searchText={''} sortBy={'name,desc'} submitAction={submitAction} />);
 

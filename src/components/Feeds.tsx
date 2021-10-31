@@ -12,14 +12,19 @@ interface FeedProps {
 }
 
 const Feeds: React.FC<FeedProps> = ({actions, feeds}) => {
-    useEffect(() => {
-        let formData: FeedFormData = {
-          page: 1,
-          searchText: '"Lords"',
-          sortBy: 'name,asc'
-        }
 
-        feeds.data.length === 0 && !feeds.error && actions.onFetchFeeds(formData);
+  const fetchFeeds = (page: number = feeds.page) => 
+  (searchText: string = feeds.searchText) => 
+  (sortBy: string = feeds.sortBy): void => {
+    const formData: FeedFormData = {page, searchText, sortBy};
+    actions.onFetchFeeds(formData);
+  }
+
+  const paginate = (page: number) => fetchFeeds(page)(feeds.searchText)(feeds.sortBy);
+  const query = (searchText: string, sortBy: string) => fetchFeeds(feeds.page)(searchText)(sortBy);
+
+    useEffect(() => {
+        feeds.data.length === 0 && !feeds.error && fetchFeeds(1)('')('');
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -33,17 +38,16 @@ const Feeds: React.FC<FeedProps> = ({actions, feeds}) => {
   return (
     <div className="App" data-testid="App">
       <h3 className="page-title" data-testid="page-title">Feed</h3>
-      <FormBar 
-        page={feeds.page}
+      <FormBar
         sortBy={feeds.sortBy}
         searchText={feeds.searchText}
-        submitAction={actions.onFetchFeeds}
+        submitAction={query}
       />
       
       <Pagination 
         page={feeds.page} 
         pageSize={feeds.pageSize} 
-        handlePagination={actions.onFetchFeeds} 
+        handlePagination={paginate} 
       />
       <div className="card-container" data-testid="card-container">
         {feeds.data.map((d: data) => <InfoCard key={d.dateLastEdited} data={d} />)}
