@@ -1,12 +1,11 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import * as actions from 'constants/actionTypes';
-import { FeedState, FeedData, FeedErrorData } from 'constants/types';
+import { FeedState, FeedPayloadAction } from 'constants/types';
 
 const initialState: FeedState = {
     page: 1,
     pageSize: 1,
     searchText: '',
-    sortBy: [],
+    sortBy: '',
     data: [],
     totalCount: 0,
     loader: false,
@@ -14,7 +13,7 @@ const initialState: FeedState = {
     errorMessage: ''
 };
 
-const FeedReducer = (state: FeedState = initialState, action: PayloadAction<FeedData | FeedErrorData | undefined>): FeedState => {
+const FeedReducer = (state: FeedState = initialState, action: FeedPayloadAction): FeedState => {
     switch(action.type) {
         case actions.ON_FETCH_FEED_DATA_LOADING:
             return Object.assign({}, state, { loader: true });

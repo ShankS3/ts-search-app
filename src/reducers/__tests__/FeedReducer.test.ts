@@ -7,7 +7,7 @@ describe('Feed Reducer', () => {
         page: 1,
         pageSize: 1,
         searchText: '',
-        sortBy: [],
+        sortBy: '',
         data: [],
         totalCount: 0,
         loader: false,
@@ -19,7 +19,7 @@ describe('Feed Reducer', () => {
         page: 1,
         pageSize: 1,
         searchText: '',
-        sortBy: [],
+        sortBy: '',
         data: [],
         totalCount: 10,
     };
@@ -28,7 +28,7 @@ describe('Feed Reducer', () => {
         page: 1,
         pageSize: 1,
         searchText: '',
-        sortBy: [],
+        sortBy: '',
         data: [],
         totalCount: 10,
         loader: false,
@@ -38,9 +38,8 @@ describe('Feed Reducer', () => {
 
     const errorPayload: FeedErrorData = {
         page: 2,
-        pageSize: 2,
         searchText: '',
-        sortBy: [],
+        sortBy: '',
         errorMessage: 'Unable to fetch data'
     }
 
@@ -60,9 +59,9 @@ describe('Feed Reducer', () => {
     it('should display error', () => {
         expect(FeedReducer(firstState, {type: actions.ON_FETCH_FEED_DATA_FAILURE, payload: errorPayload})).toEqual({
             page: 2,
-            pageSize: 2,
+            pageSize: 1,
             searchText: '',
-            sortBy: [],
+            sortBy: '',
             data: [],
             totalCount: 10,
             loader: false,
