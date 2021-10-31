@@ -1,3 +1,5 @@
+import { PayloadAction } from "@reduxjs/toolkit";
+
 export interface column {
     header: string;
     name: string;
@@ -17,20 +19,21 @@ export type columnArray = column[];
 
 export type dataArray = data[];
 
-export interface FeedData {
+export interface FeedFormData {
     page: number;
-    pageSize: number;
     searchText: string;
-    sortBy: string[];
-    data: dataArray;
-    totalCount: number;
-};
+    sortBy: string;
+}
 
-export interface FeedErrorData {
-    page: number;
+export interface FeedResponse {
+    data: dataArray;
     pageSize: number;
-    searchText: string;
-    sortBy: string[];
+    totalCount: number
+}
+
+export interface FeedData extends FeedResponse, FeedFormData {};
+
+export interface FeedErrorData extends FeedFormData {
     errorMessage: string
 };
 
@@ -39,3 +42,9 @@ export interface FeedState extends FeedData {
     error: boolean;
     errorMessage: string;
 };
+
+export type FeedPayloadAction = PayloadAction<FeedData | FeedErrorData | undefined>
+
+export interface ApplicationState {
+    feed: FeedState
+}
