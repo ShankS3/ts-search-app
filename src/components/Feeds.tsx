@@ -15,8 +15,8 @@ const Feeds: React.FC<FeedProps> = ({actions, feeds}) => {
     useEffect(() => {
         let formData: FeedFormData = {
           page: 1,
-          searchText: '',
-          sortBy: ''
+          searchText: '"Lords"',
+          sortBy: 'name,asc'
         }
 
         feeds.data.length === 0 && !feeds.error && actions.onFetchFeeds(formData);
@@ -33,8 +33,18 @@ const Feeds: React.FC<FeedProps> = ({actions, feeds}) => {
   return (
     <div className="App" data-testid="App">
       <h3 className="page-title" data-testid="page-title">Feed</h3>
-      <FormBar />
-      <Pagination page={feeds.page} pageSize={feeds.pageSize} handlePagination={actions.onFetchFeeds} />
+      <FormBar 
+        page={feeds.page}
+        sortBy={feeds.sortBy}
+        searchText={feeds.searchText}
+        submitAction={actions.onFetchFeeds}
+      />
+      
+      <Pagination 
+        page={feeds.page} 
+        pageSize={feeds.pageSize} 
+        handlePagination={actions.onFetchFeeds} 
+      />
       <div className="card-container" data-testid="card-container">
         {feeds.data.map((d: data) => <InfoCard key={d.dateLastEdited} data={d} />)}
       </div>
