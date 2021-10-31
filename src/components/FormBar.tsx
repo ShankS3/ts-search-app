@@ -1,29 +1,25 @@
-import { FeedFormData } from "constants/types";
 import React, { FormEvent, useRef } from "react";
 import Icons from 'react-fa';
 
 import 'styles/FormBar.css';
 
 interface FormBarProps {
-    page: number,
     sortBy: string,
     searchText: string,
-    submitAction: (formData: FeedFormData) => {}
+    submitAction: (searchText: string, sortBy: string) => void
 }
 
-const FormBar: React.FC<FormBarProps> = ({page=1, sortBy="", searchText="", submitAction}) => {
+const FormBar: React.FC<FormBarProps> = ({sortBy="", searchText="", submitAction}) => {
     const searchInputRef = useRef<HTMLInputElement>(null);
     const sortSelectRef = useRef<HTMLSelectElement>(null);
 
     const submitFilters = (event: FormEvent): void => {
         event.preventDefault();
 
-        let formData: FeedFormData = {
-            page,
-            searchText: searchInputRef.current?.value || '',
-            sortBy: sortSelectRef.current?.value || ''
-        };
-        submitAction(formData);
+        const searchInput = searchInputRef.current?.value || '';
+        const sortInput = sortSelectRef.current?.value || '';
+
+        submitAction(searchInput, sortInput);
     }
 
     return (
