@@ -33,6 +33,9 @@ describe('Form Bar', () => {
             sortBy: '',
             page
         })
+
+        rerender(<FormBar page={page} searchText={'abc'} sortBy={''} submitAction={submitAction} />);
+        expect(searchInput.value).toEqual('abc');
     });
 
     test('renders select field', () => {
@@ -46,6 +49,9 @@ describe('Form Bar', () => {
             sortBy: 'name,desc',
             page
         });
+
+        rerender(<FormBar page={page} searchText={''} sortBy={'name,desc'} submitAction={submitAction} />);
+
         expect(sortSelect.value).toEqual('name,desc');
         expect(getByRole('option', {name: 'Name - Ascending'}).selected).toBe(false);
         expect(getByRole('option', {name: 'Name - Descending'}).selected).toBe(true);
