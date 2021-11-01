@@ -2,9 +2,10 @@ import React, { Profiler } from 'react';
 import ReactDOM from 'react-dom';
 import 'styles/index.css';
 import App from 'components/App';
-import { persistor, store } from 'store/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { ConnectedRouter } from 'connected-react-router';
+import { persistor, store, history } from 'store/store';
 import { PersistGate } from 'redux-persist/integration/react';
 
 function onRenderCallback(
@@ -21,9 +22,11 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Profiler id="IFRM" onRender={onRenderCallback}>
-          <App />
-        </Profiler>
+        <ConnectedRouter history={history} >
+          <Profiler id="ts-search" onRender={onRenderCallback}>
+            <App />
+          </Profiler>
+        </ConnectedRouter>
       </PersistGate>
     </Provider>
   </React.StrictMode>,

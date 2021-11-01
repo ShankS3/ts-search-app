@@ -7,11 +7,14 @@ import Pagination from 'components/Pagination';
 import { columnArray, FeedState, data, FeedFormData } from 'constants/types';
 
 interface FeedProps {
+    match: any,
     actions: any,
     feeds: FeedState
 }
 
-const Feeds: React.FC<FeedProps> = ({actions, feeds}) => {
+const Feeds: React.FC<FeedProps> = ({actions, feeds, match}) => {
+
+  console.log("match", match);
 
   const fetchFeeds = (page: number = feeds.page) => 
   (searchText: string = feeds.searchText) => 
