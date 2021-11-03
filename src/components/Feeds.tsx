@@ -1,35 +1,33 @@
 import React, { useEffect } from 'react';
+import { useLocation  } from 'react-router-dom';
 
 import FormBar from 'components/FormBar';
 import InfoCard from 'components/InfoCard';
 import DataTable from 'components/DataTable';
 import Pagination from 'components/Pagination';
 import { columnArray, FeedState, data, FeedFormData } from 'constants/types';
+import { History } from 'history';
 
 interface FeedProps {
-    match: any,
+    history: History
     actions: any,
     feeds: FeedState
 }
 
-const Feeds: React.FC<FeedProps> = ({actions, feeds, match}) => {
+const Feeds: React.FC<FeedProps> = ({actions, feeds, history}) => {
+  let params =  new URLSearchParams(useLocation().search);
 
-  console.log("match", match);
+  let page: number = parseInt(params.get('page') as string, 10) || 1;
+  let searchText: string = params.get('searchText') as string || "";
+  let sortBy: string = params.get('sortBy') as string || "";
 
-  const fetchFeeds = (page: number = feeds.page) => 
-  (searchText: string = feeds.searchText) => 
-  (sortBy: string = feeds.sortBy): void => {
-    const formData: FeedFormData = {page, searchText, sortBy};
-    actions.onFetchFeeds(formData);
-  }
-
-  const paginate = (page: number) => fetchFeeds(page)(feeds.searchText)(feeds.sortBy);
-  const query = (searchText: string, sortBy: string) => fetchFeeds(feeds.page)(searchText)(sortBy);
+  const paginate = (page: number) => history.push(`/feeds?page=${page}&searchText=${feeds.searchText}&sortBy=${feeds.sortBy}`);
+  const query = (searchText: string, sortBy: string) => history.push(`/feeds?page=1&searchText=${searchText}&sortBy=${sortBy}`);
 
     useEffect(() => {
-        feeds.data.length === 0 && !feeds.error && fetchFeeds(1)('')('');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+      const formData: FeedFormData = {page, searchText, sortBy};
+      actions.onFetchFeeds(formData);
+    }, [page, searchText, sortBy, actions]);
 
   const headers: columnArray = [
     {header: 'Name', name: 'name'},
@@ -46,16 +44,22 @@ const Feeds: React.FC<FeedProps> = ({actions, feeds, match}) => {
         searchText={feeds.searchText}
         submitAction={query}
       />
-      
-      <Pagination 
-        page={feeds.page} 
-        pageSize={feeds.pageSize} 
-        handlePagination={paginate} 
-      />
-      <div className="card-container" data-testid="card-container">
-        {feeds.data.map((d: data) => <InfoCard key={d.dateLastEdited} data={d} />)}
-      </div>
-      <DataTable columns={headers} data={feeds.data} />
+      {feeds.data.length !== 0 
+        ? (
+          <>
+            <Pagination 
+              page={feeds.page} 
+              pageSize={feeds.pageSize} 
+              handlePagination={paginate} 
+            />
+            <div className="card-container" data-testid="card-container">
+              {feeds.data.map((d: data) => <InfoCard key={d.dateLastEdited} data={d} />)}
+            </div>
+            <DataTable columns={headers} data={feeds.data} />
+          </>
+        ) 
+        : (<div className="no-data-div">  No feeds found </div>)
+      }
     </div>
   );
 }

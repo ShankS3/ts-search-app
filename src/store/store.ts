@@ -31,8 +31,6 @@ export const store = configureStore({
     })
 });
 
-console.log(store.getState());
-
 export let persistor = persistStore(store);
 
 export type AppDispatch = typeof store.dispatch;

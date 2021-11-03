@@ -2,6 +2,8 @@ import { AppDispatch } from 'store/store';
 import { FeedResponse, FeedErrorData, FeedFormData, FeedPayloadAction } from 'constants/types';
 import * as actions from 'constants/actionTypes';
 
+const base_url: string = 'http://localhost:5001/api/v1';
+
 function onFetchFeedsLoading (): FeedPayloadAction {
     return {
         type: actions.ON_FETCH_FEED_DATA_LOADING,
@@ -24,10 +26,10 @@ function onFetchFeedsError (errorData: FeedErrorData): FeedPayloadAction {
 }
 
 export function onFetchFeeds (formData: FeedFormData) {
-    return async function (useAppDispatch: AppDispatch) {
+    return function (useAppDispatch: AppDispatch) {
         useAppDispatch(onFetchFeedsLoading());
-        return await fetch(`
-            http://localhost:8002/feeds?page=${formData.page}&searchText=${formData.searchText}&sortBy=${formData.sortBy}`
+        return fetch(`
+            ${base_url}/feeds?page=${formData.page}&searchText=${formData.searchText}&sortBy=${formData.sortBy}`
         )
         .then((response) => {
             if(!response.ok) throw new Error(response.statusText);

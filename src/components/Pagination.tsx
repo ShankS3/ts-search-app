@@ -55,7 +55,7 @@ const Pagination: React.FC<PaginationProps> = ({page, pageSize, handlePagination
                     > {page + 2} </button>
             )}
             {page < pageSize - 2 && <span className="page-separator">...</span>}
-            {pageSize !== 1 && (<button 
+            {pageSize > 1 && (<button 
                 className="page-button" 
                 data-testid="page-button"
                 onClick={()=>handlePagination(pageSize)}

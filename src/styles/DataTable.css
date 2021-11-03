@@ -28,7 +28,6 @@ table.dataTable {
   
 .dataTable th, .dataTable td {
     padding: .625em;
-    text-align: center;
 }
   
 .dataTable th {
